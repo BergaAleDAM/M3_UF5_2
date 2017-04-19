@@ -98,20 +98,14 @@ public class InfoClasse <N> {
         }
     }
     
-    public void crearInstancia(){
+    public Object crearInstancia() throws InstantiationException, IllegalAccessException{
         
-        Classe<N> classe = new Classe<>();
+        return e.getClass().newInstance();
     }
     
-    public Classe<N> clon() throws CloneNotSupportedException{
+    public Object clon() throws CloneNotSupportedException{
     
-        Element element =null;
-        try{
-        return element.clone();
-        }catch(Exception ex){
-            System.out.println(ex);
-        }
-        return element;
+        return super.clone();
         
     }   
 
