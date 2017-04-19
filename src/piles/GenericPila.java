@@ -2,19 +2,20 @@
 package piles;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 public class GenericPila<T> implements IPila<T> {
 
+    private ArrayList<Node> nodos;
     private Node nodo = null;
-    private int mida = 0;
-    private T valor = null;
+ private T valor = null;
 
   
     @Override
     public void afegir(T t) {
-        nodo = new Node(nodo, t);
-        mida++;
+        nodos.add(new Node(nodo, t));
+      
     }
 
  
@@ -22,26 +23,24 @@ public class GenericPila<T> implements IPila<T> {
     @Override
     public T treure() {
         
-        if (nodo != null) {
-            valor = (T) nodo.t;
-            nodo = nodo.pare;       
-            mida--;
-        } 
-        return valor;
+        nodo = (Node) nodos.listIterator();
+        nodos.remove(nodos.listIterator());
+        
+        return (T) nodo.t;
     }
 
     
     @Override
     public void buidar() {
-        nodo = null;
-        mida = 0;
+        nodos = null;
+
     }
 
     
     @Override
     public T[] toArray(Class t) {
-         T[] llista = (T[]) Array.newInstance(t, mida);
-        int auxi = mida; 
+         T[] llista = (T[]) Array.newInstance(t, nodos.size());
+        int auxi = nodos.size(); 
         Node aux = nodo; 
         
         while(aux != null){
@@ -54,7 +53,7 @@ public class GenericPila<T> implements IPila<T> {
 
     @Override
     public int mida() {
-        return mida;
+        return nodos.size();
     }
 
 
